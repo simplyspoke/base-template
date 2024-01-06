@@ -1,0 +1,18 @@
+arrowParens: 'always'
+bracketSpacing: true
+htmlWhitespaceSensitivity: 'ignore'
+printWidth: 80
+proseWrap: 'always'
+quoteProps: 'as-needed'
+semi: true
+singleQuote: true
+tabWidth: 2
+trailingComma: 'es5'
+useTabs: false
+
+# And example of an override configuration
+overrides:
+  - files: '*.md'
+    options:
+      proseWrap: never
+      embeddedLanguageFormatting: off

@@ -1,0 +1,51 @@
+{
+  "name": "base-template",
+  "version": "0.0.0",
+  "private": true,
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simplyspoke/base-template.git"
+  },
+  "scripts": {
+    "commit": "npx git-cz",
+    "commit:retry": "npx git-cz --retry",
+    "release": "semantic-release",
+    "prepare": "husky install"
+  },
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "lint-staged": {
+    "**/*.{md,yaml,js,sh}": [
+      "prettier --write --ignore-unknown"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@commitlint/config-conventional": "^17.4.2",
+    "@commitlint/prompt": "^17.4.2",
+    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.1.1",
+    "semantic-release": "^22.0.12"
+  }
+}

@@ -1,0 +1,28 @@
+#!/bin/bash
+# DO NOT PLACE ANY SENSATIVE INFORMATION IN THIS FILE AS IT IS PLAIN TEXT!!!
+
+export ENVIROMENT='test'
+
+export VAULT_ADDR='https://vault.someurl.com'
+
+# Keepassxc
+KEEPASSXC_DATABASE="$HOME/Documents/access.kdbx"
+KEEPASSXC_KEYFILE="$HOME/Documents/pass.key"
+
+# If there is a keypass database file, then load from it
+if [ -f "${KEEPASSXC_DATABASE}" ]; then
+    echo -n "Keepass Password:"
+    read -s KEEPASS_PASSWORD
+
+    # Vault
+    export VAULT_TOKEN=$(echo -e "${KEEPASS_PASSWORD}" | keepassxc-cli show \
+        --key-file="$KEEPASSXC_KEYFILE" \
+        --attributes Password \
+        "$KEEPASSXC_DATABASE" "${ENVIROMENT}-vault")
+fi
+
+if [ -z "$VAULT_TOKEN" ]; then
+    echo 'A Vault Token must be set'
+fi
+
+
